@@ -6,9 +6,16 @@
   <title>Catholic Indulgences Hub</title>
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; background-color: #f4f6f8; color: #2c3e50; }
-    h1 { color: #5c1d24; text-align: center; margin-bottom: 8px; }
-    p.subtitle { text-align: center; color: #666; margin-top: 0; margin-bottom: 30px; }
+    h1 { color: #5c1d24; text-align: center; margin-bottom: 4px; }
+    p.subtitle { text-align: center; color: #666; margin-top: 0; margin-bottom: 25px; }
     
+    /* Active Today Banner */
+    .today-banner { background: #8a1c28; color: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+    .today-banner h2 { margin: 0 0 10px 0; font-size: 1.3em; display: flex; align-items: center; justify-content: space-between; }
+    .today-date-badge { background: #f0c14b; color: #333; padding: 4px 10px; border-radius: 12px; font-size: 0.75em; font-weight: bold; }
+    .active-item { background: rgba(255, 255, 255, 0.15); padding: 10px 14px; border-radius: 6px; margin-top: 8px; border-left: 4px solid #f0c14b; }
+    .active-item strong { font-size: 1.05em; display: block; }
+
     /* Controls Area */
     .controls { display: flex; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
     .search-input { flex: 2; min-width: 200px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1em; }
@@ -18,7 +25,7 @@
     .card { background: white; padding: 22px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 3px 6px rgba(0,0,0,0.08); border-left: 6px solid #5c1d24; }
     .card-header { display: flex; justify-content: space-between; align-items: baseline; }
     .card h2 { margin: 0 0 10px 0; font-size: 1.3em; color: #1a1a1a; }
-    .badge { background: #5c1d24; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.75em; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
+    .badge { background: #5c1d24; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.75em; text-transform: uppercase; font-weight: bold; }
     .norm { font-style: italic; color: #7f8c8d; font-size: 0.9em; margin-bottom: 15px; }
     .conditions { background-color: #fcf8f2; padding: 12px 15px; border-radius: 6px; border: 1px solid #f0e6d6; margin-top: 15px; }
     .conditions h4 { margin: 0 0 8px 0; font-size: 0.9em; color: #8a6d3b; text-transform: uppercase; }
@@ -31,12 +38,21 @@
   <h1>✝️ Catholic Indulgences Hub</h1>
   <p class="subtitle">A searchable reference for Catholic indulgences and norms</p>
 
+  <div class="today-banner">
+    <h2>
+      📅 Active Today 
+      <span id="currentDateBadge" class="today-date-badge">Loading date...</span>
+    </h2>
+    <div id="activeTodayContainer">Checking liturgical calendar...</div>
+  </div>
+
   <div class="controls">
     <input type="text" id="searchInput" class="search-input" placeholder="Search by keyword (e.g., Rosary, Cemetery)...">
     <select id="typeFilter" class="filter-select">
       <option value="ALL">All Types</option>
       <option value="Plenary">Plenary</option>
       <option value="Partial">Partial</option>
+      <option value="TODAY_ONLY">⭐ Active Today Only</option>
     </select>
   </div>
 
@@ -44,19 +60,63 @@
 
   <script>
     let allIndulgences = [];
+    let todayMMDD = '';
 
-    // Fetch JSON Data
-    fetch('data/indulgences.json')
+    // Calculate Today's Date in MM-DD format
+    function setTodayDate() {
+      const now = new Date();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      todayMMDD = `${month}-${day}`;
+
+      const options = { month: 'long', day: 'numeric', year: 'numeric' };
+      document.getElementById('currentDateBadge').innerText = now.toLocaleDateString('en-US', options);
+    }
+
+    // Fetch JSON Data (with cache-busting timestamp)
+    setTodayDate();
+    fetch('data/indulgences.json?v=' + new Date().getTime())
       .then(response => response.json())
       .then(data => {
         allIndulgences = data;
-        renderIndulgences(allIndulgences);
+        renderActiveTodayBanner(data);
+        renderIndulgences(data);
       })
       .catch(err => {
         document.getElementById('indulgencesContainer').innerText = 'Error loading indulgence records.';
       });
 
-    // Render Indulgences to HTML
+    // Check if an indulgence is active today based on dates
+    function isIndulgenceActiveToday(item) {
+      if (item.date_type === 'fixed_date' || item.date_type === 'seasonal') {
+        if (item.start_date && item.end_date) {
+          return todayMMDD >= item.start_date && todayMMDD <= item.end_date;
+        }
+      }
+      return false;
+    }
+
+    // Populate the "Active Today" Banner
+    function renderActiveTodayBanner(items) {
+      const bannerContainer = document.getElementById('activeTodayContainer');
+      const activeItems = items.filter(isIndulgenceActiveToday);
+
+      if (activeItems.length === 0) {
+        bannerContainer.innerHTML = `
+          <p style="margin:0;">There are no date-specific feast day indulgences active today. 
+          Remember that <strong>anytime indulgences</strong> (such as Eucharistic Adoration, Scripture reading, or the Rosary) can be gained every day!</p>
+        `;
+      } else {
+        bannerContainer.innerHTML = activeItems.map(item => `
+          <div class="active-item">
+            <strong>${item.title} (${item.type})</strong>
+            <small>${item.description}</small>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Render Main Indulgence Cards
     function renderIndulgences(items) {
       const container = document.getElementById('indulgencesContainer');
       container.innerHTML = '';
@@ -98,7 +158,14 @@
                               item.description.toLowerCase().includes(searchTerm) ||
                               item.work_required.toLowerCase().includes(searchTerm);
         
-        const matchesType = (selectedType === 'ALL') || (item.type === selectedType);
+        let matchesType = false;
+        if (selectedType === 'ALL') {
+          matchesType = true;
+        } else if (selectedType === 'TODAY_ONLY') {
+          matchesType = isIndulgenceActiveToday(item);
+        } else {
+          matchesType = (item.type === selectedType);
+        }
 
         return matchesSearch && matchesType;
       });
@@ -106,7 +173,7 @@
       renderIndulgences(filtered);
     }
 
-    // Attach Event Listeners
+    // Event Listeners
     document.getElementById('searchInput').addEventListener('input', filterData);
     document.getElementById('typeFilter').addEventListener('change', filterData);
   </script>
