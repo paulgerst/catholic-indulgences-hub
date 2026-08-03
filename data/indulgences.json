@@ -80,5 +80,39 @@
     ],
     "work_required": "Perform the pious exercise of the 14 Stations of the Cross before legitimately erected stations, moving from station to station and meditating on the Passion.",
     "description": "A plenary indulgence is granted to the faithful who perform the pious exercise of the Way of the Cross."
+  },
+  {
+    "id": "veni-creator-jan-1",
+    "title": "Recitation of Veni Creator Spiritus (January 1)",
+    "type": "Plenary",
+    "scope": "For self or applicable to the Souls in Purgatory",
+    "norm_number": "26 §1 1°",
+    "date_type": "fixed_date",
+    "start_date": "01-01",
+    "end_date": "01-01",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Devoutly recite or sing the hymn Veni Creator Spiritus in a church or oratory on New Year's Day.",
+    "description": "A plenary indulgence is granted to the faithful who devoutly recite or sing the hymn Veni Creator Spiritus on the first day of the year to implore divine assistance for the coming year."
+  },
+  {
+    "id": "veneration-cross-good-friday",
+    "title": "Adoration of the Cross (Good Friday)",
+    "type": "Plenary",
+    "scope": "For self or applicable to the Souls in Purgatory",
+    "norm_number": "13",
+    "date_type": "movable_feast",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Devoutly assist at the solemn liturgical action of Good Friday and venerate the Holy Cross.",
+    "description": "A plenary indulgence is granted to the faithful who, during the solemn liturgical action of Good Friday, devoutly participate in the adoration of the Cross and kiss it."
   }
 ]
