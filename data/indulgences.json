@@ -1,0 +1,36 @@
+[
+  {
+    "id": "cemetery-visit-nov",
+    "title": "Visit to a Cemetery (November 1–8)",
+    "type": "Plenary",
+    "scope": "Applicable only to the Souls in Purgatory",
+    "norm_number": "29 §1 1°",
+    "date_type": "seasonal",
+    "start_date": "11-01",
+    "end_date": "11-08",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Devoutly visit a cemetery and pray, if only mentally, for the deceased.",
+    "description": "A plenary indulgence, applicable only to the souls in purgatory, is granted to the faithful who devoutly visit a cemetery and pray for the departed during November 1 through 8."
+  },
+  {
+    "id": "marian-rosary-recitation",
+    "title": "Recitation of the Marian Rosary",
+    "type": "Plenary",
+    "scope": "For self or applicable to the Souls in Purgatory",
+    "norm_number": "17 §1 1°",
+    "date_type": "anytime",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Recite five decades of the Rosary in a church, public oratory, or in a family, religious community, or pious association.",
+    "description": "A plenary indulgence is granted if the Rosary is recited in a church or public oratory, or in a family, religious community, or association of the faithful."
+  }
+]
