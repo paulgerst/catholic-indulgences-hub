@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catholic Indulgences API - Developer Documentation</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 850px; margin: 40px auto; padding: 0 20px; background-color: #f8f9fa; color: #2c3e50; line-height: 1.6; }
+    h1, h2, h3 { color: #5c1d24; }
+    h1 { border-bottom: 2px solid #5c1d24; padding-bottom: 10px; }
+    .badge { background: #5c1d24; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+    .endpoint-box { background: #eef2f5; border-left: 5px solid #5c1d24; padding: 15px; border-radius: 4px; font-family: monospace; font-size: 1em; overflow-x: auto; word-break: break-all; }
+    code, pre { background: #272822; color: #f8f8f2; padding: 12px; border-radius: 6px; display: block; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; }
+    inline-code { background: #e9ecef; color: #bd4147; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
+    th { background-color: #f2f2f2; color: #5c1d24; }
+    .nav-link { display: inline-block; margin-bottom: 20px; color: #5c1d24; text-decoration: none; font-weight: bold; }
+    .nav-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
 
+  <a href="../" class="nav-link">← Back to Main Website</a>
+
+  <h1>✝️ Catholic Indulgences API Documentation</h1>
+  <p>Welcome developers! The <strong>Catholic Indulgences API</strong> provides structured, open-source JSON data based on the official <em>Enchiridion Indulgentiarum</em> (Manual of Indulgences). You can use this free endpoint in web apps, parish portals, and mobile applications.</p>
+
+  ---
+
+  <h2>1. Base Endpoints</h2>
+  <p>You can fetch the complete dataset directly using either our primary GitHub Pages URL or the jsDelivr Global CDN:</p>
+
+  <h3>Direct GitHub Pages Endpoint <span class="badge">GET</span></h3>
+  <div class="endpoint-box">
+    GET https://paulgerst.github.io/catholic-indulgences-hub/data/indulgences.json
+  </div>
+
+  <h3>Fast CDN Endpoint (Recommended for Apps) <span class="badge">GET</span></h3>
+  <div class="endpoint-box">
+    GET https://cdn.jsdelivr.net/gh/paulgerst/catholic-indulgences-hub@main/data/indulgences.json
+  </div>
+
+  ---
+
+  <h2>2. Quick Start Example (JavaScript)</h2>
+  <p>Fetch and log the indulgences in modern JavaScript using <inline-code>fetch()</inline-code>:</p>
+
+  <pre><code>// Fetch dataset from API
+fetch('https://paulgerst.github.io/catholic-indulgences-hub/data/indulgences.json')
+  .then(response => response.json())
+  .then(data => {
+    console.log("Total Indulgences Loaded:", data.length);
+    console.log(data);
+  })
+  .catch(error => console.error("API Error:", error));</code></pre>
+
+  ---
+
+  <h2>3. Data Schema & Response Fields</h2>
+  <p>Each object in the returned JSON array contains the following fields:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Field Key</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><inline-code>id</inline-code></td>
+        <td>String</td>
+        <td>Unique slug identifier (e.g., <code>marian-rosary-recitation</code>)</td>
+      </tr>
+      <tr>
+        <td><inline-code>title</inline-code></td>
+        <td>String</td>
+        <td>Official title of the indulgence work or grant</td>
+      </tr>
+      <tr>
+        <td><inline-code>type</inline-code></td>
+        <td>String</td>
+        <td>Indulgence category: <code>Plenary</code> or <code>Partial</code></td>
+      </tr>
+      <tr>
+        <td><inline-code>norm_number</inline-code></td>
+        <td>String</td>
+        <td>Canonical reference number in the <em>Enchiridion</em></td>
+      </tr>
+      <tr>
+        <td><inline-code>date_type</inline-code></td>
+        <td>String</td>
+        <td>Timing rule: <code>anytime</code>, <code>fixed_date</code>, <code>seasonal</code>, or <code>movable_feast</code></td>
+      </tr>
+      <tr>
+        <td><inline-code>general_conditions</inline-code></td>
+        <td>Array</td>
+        <td>List of standard spiritual requirements (e.g., Confession, Communion)</td>
+      </tr>
+      <tr>
+        <td><inline-code>work_required</inline-code></td>
+        <td>String</td>
+        <td>Specific pious work or prayer required to gain the indulgence</td>
+      </tr>
+    </tbody>
+  </table>
+
+  ---
+
+  <h2>4. Attribution & Terms</h2>
+  <p>This API is open-source under the <strong>MIT License</strong>. You are free to use it in personal, commercial, or ministry projects. We ask that you cite the <em>Enchiridion Indulgentiarum</em> as the canonical source.</p>
+
+</body>
+</html>
