@@ -32,5 +32,53 @@
     ],
     "work_required": "Recite five decades of the Rosary in a church, public oratory, or in a family, religious community, or pious association.",
     "description": "A plenary indulgence is granted if the Rosary is recited in a church or public oratory, or in a family, religious community, or association of the faithful."
+  },
+  {
+    "id": "adoration-blessed-sacrament",
+    "title": "Adoration of the Most Blessed Sacrament",
+    "type": "Plenary",
+    "scope": "For self or applicable to the Souls in Purgatory",
+    "norm_number": "7 §1 1°",
+    "date_type": "anytime",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Visit the Most Blessed Sacrament for Eucharistic adoration for at least 30 minutes.",
+    "description": "A plenary indulgence is granted to the faithful who visit the Most Blessed Sacrament for adoration for at least half an hour."
+  },
+  {
+    "id": "scripture-reading",
+    "title": "Reading of Sacred Scripture",
+    "type": "Plenary",
+    "scope": "For self or applicable to the Souls in Purgatory",
+    "norm_number": "30",
+    "date_type": "anytime",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Read Sacred Scripture as spiritual reading with veneration due to the divine word for at least 30 minutes.",
+    "description": "A plenary indulgence is granted to the faithful who read Sacred Scripture with the veneration due to the divine word for at least half an hour."
+  },
+  {
+    "id": "stations-of-the-cross",
+    "title": "Exercise of the Way of the Cross",
+    "type": "Plenary",
+    "scope": "For self or applicable to the Souls in Purgatory",
+    "norm_number": "13",
+    "date_type": "anytime",
+    "general_conditions": [
+      "Sacramental Confession",
+      "Eucharistic Communion",
+      "Prayer for the intentions of the Supreme Pontiff",
+      "Complete detachment from all sin, even venial"
+    ],
+    "work_required": "Perform the pious exercise of the 14 Stations of the Cross before legitimately erected stations, moving from station to station and meditating on the Passion.",
+    "description": "A plenary indulgence is granted to the faithful who perform the pious exercise of the Way of the Cross."
   }
 ]
