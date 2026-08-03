@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Catholic Indulgences Hub</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; background-color: #f8f9fa; color: #333; }
+    h1 { color: #5c1d24; text-align: center; }
+    .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-left: 5px solid #5c1d24; }
+    .badge { background: #5c1d24; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; text-transform: uppercase; }
+    .norm { font-style: italic; color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+
+  <h1>✝️ Catholic Indulgences</h1>
+  <div id="indulgences-container">Loading indulgences...</div>
+
+  <script>
+    // Fetch data directly from your JSON file
+    fetch('data/indulgences.json')
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById('indulgences-container');
+        container.innerHTML = ''; // Clear loading text
+
+        data.forEach(item => {
+          container.innerHTML += `
+            <div class="card">
+              <h2>${item.title} <span class="badge">${item.type}</span></h2>
+              <p><strong>Norm:</strong> <span class="norm">${item.norm_number}</span></p>
+              <p><strong>Scope:</strong> ${item.scope}</p>
+              <p>${item.description}</p>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        document.getElementById('indulgences-container').innerText = 'Failed to load data.';
+      });
+  </script>
+
+</body>
+</html>
